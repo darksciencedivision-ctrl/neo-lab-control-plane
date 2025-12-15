@@ -1,0 +1,17 @@
+﻿queue/
+queue_v2/
+logs/
+neo_data/
+
+*.bak
+*.backup
+*.tmp
+*_BACKUP*
+*_BROKEN_BACKUP*
+
+.vscode/
+.DS_Store
+Thumbs.db
+
+*.env
+*.token

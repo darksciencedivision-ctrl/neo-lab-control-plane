@@ -1,0 +1,27 @@
+{
+  "version": "1.0",
+  "required_report_sections": [
+    "Executive Summary",
+    "Scope & Assumptions",
+    "Core Analysis",
+    "Risks",
+    "Verification"
+  ],
+  "prompts": [
+    {
+      "id": "RPT_001",
+      "mode": "report",
+      "prompt": "Write a multi-page engineering report on the NEO-LAB architecture, failure modes, and commercialization readiness."
+    },
+    {
+      "id": "RPT_002",
+      "mode": "report",
+      "prompt": "Write a multi-page technical report explaining how to build an atomic file-based IPC queue on Windows PowerShell and why it prevents race conditions."
+    },
+    {
+      "id": "RPT_003",
+      "mode": "report",
+      "prompt": "Write a multi-page report summarizing general differences between local, state, and federal law in the U.S. and how to verify official sources. Not legal advice."
+    }
+  ]
+}
