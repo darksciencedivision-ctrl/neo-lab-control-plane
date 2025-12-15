@@ -15,3 +15,8 @@ Thumbs.db
 
 *.env
 *.token
+
+# backups
+*.BACKUP_*
+*_BROKEN_BACKUP
+
