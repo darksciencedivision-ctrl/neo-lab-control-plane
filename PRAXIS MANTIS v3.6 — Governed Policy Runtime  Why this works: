@@ -1,0 +1,55 @@
+
+## PRAXIS MANTIS v3.6 — Governed Policy Runtime (Fail-Closed) + Explainability Layer
+
+PRAXIS MANTIS v3.6 is a governed policy runtime designed to operate alongside PRAXIS TITAN as an explainable, fail-closed decision-support layer. It evaluates candidate mitigation policies, enforces immutable constraints (including budget authority), and emits structured, auditable outputs suitable for engineering review.
+
+This release is intentionally not an autonomous agent. It does not self-execute actions, does not self-modify, and does not escalate privileges. It produces bounded recommendations and explicit refusals when constraints are violated.
+
+### Key Capabilities
+
+- **Governed Policy Evaluation**
+  - Assemble candidate mitigations from a registry
+  - Score and rank policies under a defined objective function
+  - Emit ranked outputs with structured rationale
+
+- **Fail-Closed Constraint Enforcement**
+  - Enforces hard constraints such as **budget authority (ISC)**
+  - If `policy_cost > available_budget`, MANTIS **halts/refuses** rather than improvising
+  - Refusals include explicit required vs available values
+
+- **Explainability Outputs (Audit-Grade)**
+  - Produces explainability artifacts describing selection/refusal reasons
+  - Explicitly references the evidence/artifacts used for evaluation
+  - Designed for replay and review without hidden state
+
+- **Offline / Artifact-Driven Execution**
+  - Local-first posture aligned with PRAXIS design philosophy
+  - Inputs and outputs are explicit file artifacts for traceability
+
+### Typical Pipeline
+
+1) Ingest artifacts and validate required fields  
+2) Assemble policy candidates and attach cost/prerequisites metadata  
+3) Score and rank candidates under objective function  
+4) Apply governance gate (budget + hard constraints)  
+5) Emit decision + explainability + verification checklist artifacts  
+
+### Output Artifacts (Typical)
+
+- `mantis_decision.json` — ranked candidates, selections, refusals, binding constraints  
+- `mantis_explain.json` — explainability trace: reasons, evidence, checks  
+- `mantis_verification.json` — operator checklist to validate expected impact  
+- `mantis_log.txt` — human-readable runtime summary  
+
+(Exact filenames may vary; the contract is structured + auditable + replayable.)
+
+### Non-Goals (By Design)
+
+- No autonomous execution  
+- No self-modification  
+- No privilege escalation  
+- No “guessing” when required artifacts are missing  
+
+### Disclaimer
+
+PRAXIS MANTIS provides decision-support output only. It does not execute actions. Operators remain responsible for verification and for consulting primary sources and qualified professionals in high-stakes domains.
