@@ -20,3 +20,11 @@ Thumbs.db
 *.BACKUP_*
 *_BROKEN_BACKUP
 
+
+# runtime artifacts
+neo_queue.txt
+user_task_queue.txt
+
+# duplicates
+docker-compose.yml.txt
+
