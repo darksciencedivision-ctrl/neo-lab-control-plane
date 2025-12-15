@@ -28,3 +28,11 @@ user_task_queue.txt
 # duplicates
 docker-compose.yml.txt
 
+
+# runtime artifacts
+neo_queue.txt
+user_task_queue.txt
+
+# duplicates
+docker-compose.yml.txt
+
