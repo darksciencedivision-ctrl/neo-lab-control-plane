@@ -1,5 +1,4 @@
-
-## PRAXIS MANTIS v3.6 — Governed Policy Runtime (Fail-Closed) + Explainability Layer
+PRAXIS MANTIS v3.6 - Governed Policy Runtime - Why this works.md
 
 PRAXIS MANTIS v3.6 is a governed policy runtime designed to operate alongside PRAXIS TITAN as an explainable, fail-closed decision-support layer. It evaluates candidate mitigation policies, enforces immutable constraints (including budget authority), and emits structured, auditable outputs suitable for engineering review.
 
