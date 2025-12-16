@@ -1,54 +1,306 @@
-PRAXIS MANTIS v3.6 - Governed Policy Runtime - Why this works.md
+PRAXIS MANTIS v3.6 — Governed Policy Runtime
+Why This Works
+Executive Summary
 
-PRAXIS MANTIS v3.6 is a governed policy runtime designed to operate alongside PRAXIS TITAN as an explainable, fail-closed decision-support layer. It evaluates candidate mitigation policies, enforces immutable constraints (including budget authority), and emits structured, auditable outputs suitable for engineering review.
+PRAXIS MANTIS v3.6 is a deterministic, governed policy-execution runtime designed to evaluate, authorize, and stage actions without performing uncontrolled execution. It operates as a policy brain, not an agent, enforcing explicit constraints at every stage of decision-making.
 
-This release is intentionally not an autonomous agent. It does not self-execute actions, does not self-modify, and does not escalate privileges. It produces bounded recommendations and explicit refusals when constraints are violated.
+This system is engineered to be:
 
-### Key Capabilities
+Deterministic
 
-- **Governed Policy Evaluation**
-  - Assemble candidate mitigations from a registry
-  - Score and rank policies under a defined objective function
-  - Emit ranked outputs with structured rationale
+Auditable
 
-- **Fail-Closed Constraint Enforcement**
-  - Enforces hard constraints such as **budget authority (ISC)**
-  - If `policy_cost > available_budget`, MANTIS **halts/refuses** rather than improvising
-  - Refusals include explicit required vs available values
+Fail-closed
 
-- **Explainability Outputs (Audit-Grade)**
-  - Produces explainability artifacts describing selection/refusal reasons
-  - Explicitly references the evidence/artifacts used for evaluation
-  - Designed for replay and review without hidden state
+Human-governed
 
-- **Offline / Artifact-Driven Execution**
-  - Local-first posture aligned with PRAXIS design philosophy
-  - Inputs and outputs are explicit file artifacts for traceability
+Cryptographically verifiable
 
-### Typical Pipeline
+MANTIS does not “decide” in the human sense. It scores, ranks, and refuses actions based on explicit policy, budget, and authorization gates.
 
-1) Ingest artifacts and validate required fields  
-2) Assemble policy candidates and attach cost/prerequisites metadata  
-3) Score and rank candidates under objective function  
-4) Apply governance gate (budget + hard constraints)  
-5) Emit decision + explainability + verification checklist artifacts  
+This document explains why the design works, technically and operationally.
 
-### Output Artifacts (Typical)
+What MANTIS Is (and Is Not)
+MANTIS Is
 
-- `mantis_decision.json` — ranked candidates, selections, refusals, binding constraints  
-- `mantis_explain.json` — explainability trace: reasons, evidence, checks  
-- `mantis_verification.json` — operator checklist to validate expected impact  
-- `mantis_log.txt` — human-readable runtime summary  
+A policy evaluation engine
 
-(Exact filenames may vary; the contract is structured + auditable + replayable.)
+A budget-aware authorization gate
 
-### Non-Goals (By Design)
+A deterministic planner
 
-- No autonomous execution  
-- No self-modification  
-- No privilege escalation  
-- No “guessing” when required artifacts are missing  
+A risk-constrained decision scorer
 
-### Disclaimer
+A pre-execution filter
 
-PRAXIS MANTIS provides decision-support output only. It does not execute actions. Operators remain responsible for verification and for consulting primary sources and qualified professionals in high-stakes domains.
+MANTIS Is Not
+
+❌ An autonomous agent
+
+❌ A self-executing AI
+
+❌ A conversational system
+
+❌ A black-box model
+
+❌ A system with hidden state
+
+Core Design Principle
+
+No action may proceed unless it is explicitly justified, budgeted, authorized, and cryptographically staged.
+
+Everything in MANTIS exists to enforce this principle.
+
+System Architecture Overview
+
+MANTIS operates inside a governed control plane and interfaces with other PRAXIS components via explicit file artifacts.
+
+Primary Inputs
+
+baseline_summary.json (from TITAN)
+
+proposal_request.json
+
+run_manifest.json
+
+Policy configuration files
+
+Budget ledgers (ISC)
+
+Primary Outputs
+
+Ranked policy decisions
+
+Budget acceptance / refusal
+
+Staged execution envelopes
+
+Immutable state artifacts
+
+No implicit memory. No hidden queues. No runtime drift.
+
+Deterministic Runtime Model
+
+MANTIS uses a pure function execution model:
+
+(input artifacts) → (policy evaluation) → (scored outputs)
+
+
+Given identical inputs, MANTIS will always produce identical outputs.
+
+This property enables:
+
+Reproducibility
+
+Audit replay
+
+External verification
+
+Legal defensibility
+
+Policy Evaluation Flow
+
+Load Canonical Baseline
+
+Path-verified
+
+Hash-verified
+
+Chain-validated
+
+Load Proposal
+
+Baseline alignment enforced
+
+Structural validation
+
+Intent declaration required
+
+Apply Policy Set
+
+Explicit rules
+
+No heuristics
+
+No inference shortcuts
+
+Budget Enforcement
+
+Hard limits (ISC)
+
+No overdraft
+
+No negotiation
+
+Decision Emission
+
+Accept / Refuse / Stage
+
+Deterministic scoring
+
+Full traceability
+
+Budget Governance (Why It Matters)
+
+Every policy decision consumes ISC (Intent-Scoped Cost) units.
+
+Key properties:
+
+Finite
+
+Ledgered
+
+Non-forgivable
+
+Non-virtual
+
+This prevents:
+
+Infinite planning loops
+
+Runaway optimization
+
+Hidden execution costs
+
+Policy inflation
+
+If the budget is insufficient, execution halts — no exceptions.
+
+Human-in-the-Loop Enforcement
+
+MANTIS cannot authorize execution alone.
+
+All execution paths require:
+
+Human-signed authorization
+
+Cryptographic verification
+
+Explicit intent confirmation
+
+This is not UX friction — it is deliberate governance.
+
+Cryptographic Integrity
+
+Every critical artifact is protected by:
+
+SHA-256 hashing
+
+RSA-3072 signatures
+
+Chain-of-custody verification
+
+This ensures:
+
+Tamper detection
+
+Provenance tracking
+
+Forensic replay
+
+Legal audit readiness
+
+Fail-Closed by Design
+
+If anything is missing, mismatched, or invalid:
+
+Execution does not continue
+
+State does not mutate
+
+Errors are explicit
+
+There is no “best effort” mode.
+
+This is intentional.
+
+Why This Works in Practice
+1. No Hidden State
+
+All system state lives in files you can inspect, diff, archive, and replay.
+
+2. No Emergent Authority
+
+MANTIS never gains power through learning or iteration.
+
+3. No Execution Without Consent
+
+Even perfect policy alignment does not bypass authorization.
+
+4. No Silent Failure
+
+Errors are loud, blocking, and logged.
+
+5. No Ambiguity
+
+Every decision can be traced to:
+
+A rule
+
+A budget
+
+A signature
+
+A hash
+
+Comparison to Typical AI Systems
+Feature	Typical AI Agent	PRAXIS MANTIS
+Deterministic	❌	✅
+Auditable	❌	✅
+Human-gated execution	❌	✅
+Budget-constrained	❌	✅
+Offline-safe	❌	✅
+Fail-closed	❌	✅
+Intended Use Cases
+
+Policy simulation
+
+Risk-bounded planning
+
+Governance tooling
+
+AI safety research
+
+Pre-deployment validation
+
+Regulated environments
+
+What This Demonstrates to Employers
+
+MANTIS proves the ability to design:
+
+Production-grade governance systems
+
+Deterministic AI control planes
+
+Safety-first execution models
+
+Cryptographically sound pipelines
+
+Auditable decision systems
+
+This is systems engineering, not prompt engineering.
+
+Current Status (v3.6)
+
+✅ Fully operational
+
+✅ Integrated with TITAN + NEO
+
+✅ Dry-run execution gate enforced
+
+✅ Cryptographic chain verified
+
+✅ Reference baseline frozen
+
+No uncontrolled execution paths exist.
+
+Final Statement
+
+PRAXIS MANTIS works because it refuses to be clever.
+
+It does not guess.
+It does not improvise.
+It does not overreach.
+
+It enforces structure, limits, and accountability — exactly what real-world AI systems require.
