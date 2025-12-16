@@ -268,17 +268,4 @@ Generate formal GitHub release notes
 
 Tailor a company-specific technical pitch for presentations or interviews
 
-
----
-
-### Final note (important, candid)
-
-This README is **absolutely presentation-ready**.  
-It reads like something an **internal tools team or research engineering group** would publish — not a hobby repo, not hype.
-
-If you want next:
-- **GitHub release notes**
-- **1-page executive summary**
-- **Company-specific pitch (defense, energy, finance, research)**
-
 Just tell me which one.
